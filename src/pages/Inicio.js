@@ -1,15 +1,18 @@
-import Header from '../components/Header';
+import Header from "../components/Header";
+import Mapa from "../components/Mapa";
 
-function Inicio(){
+import React, { useState } from "react";
 
-    return(
-        <div className="container">
-            <Header></Header>
-            
-        </div>
-    )
+function Inicio() {
 
+  
+  return (
+    <div className="container">
+      <Header></Header>
+      
+     <Mapa/>
+    </div>
+  );
 }
-
 
 export default Inicio;

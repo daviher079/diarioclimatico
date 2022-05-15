@@ -5,12 +5,29 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import "../assets/css/header.css";
 import imagenes from "../assets/imagenes";
+import {  useState, useEffect } from "react";
 
 function Header() {
+
+  const [login, setLogin] = useState({
+    etiqueta: "Login",
+    url: "/Login",
+  });
+
+  var mailSession = sessionStorage.getItem("userName");
+  useEffect(() => {
+    if (mailSession !== null) {
+      
+      setLogin({
+        etiqueta: "Ver perfil",
+        url: "/VerPerfil",
+      });
+    }
+  }, [mailSession]);
   return (
     <Navbar className="cabecera" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
           {" "}
           <img className="logo_centro" src={imagenes.logo} alt=".." />
         </Navbar.Brand>
@@ -44,9 +61,12 @@ function Header() {
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="text-dark" href="/Login">
-            Login
-          </Nav.Link>
+        <Link
+            to={`${login.url}`}
+            style={{ textDecoration: "none", textAlign: "center" }}
+          >
+            <span className="text-dark">{login.etiqueta}</span>
+          </Link>
         </Nav.Item>
       </Container>
     </Navbar>
