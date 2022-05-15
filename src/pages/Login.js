@@ -18,9 +18,6 @@ export default function Login() {
     const handleClose = () => setShow(false);
   
 
-
-    
-
     //const {login} = useAuth();
 
     const handleChange = ({target: {name, value}})=>
@@ -100,7 +97,7 @@ export default function Login() {
                         
                                 </div>
                                 <div className="w-50 text-md-right">
-                                <Link to="./RegistrarUsuarios">Nuevo Usuario</Link>
+                                <Link to="/DarAlta">Nuevo Usuario</Link>
                                 </div>
                 </div>
               </form>

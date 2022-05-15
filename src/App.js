@@ -4,8 +4,12 @@ import { Route, Routes } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
 import Inicio from "./pages/Inicio";
 import Login from "./pages/Login";
+import Desconectar from "./pages/Desconectar"
 import { AuthProvider } from "./context/authContext";
 import VerPerfil from "./pages/VerPerfil";
+import DarAlta from "./pages/DarAlta";
+import Comunidades from "./pages/Comunidades";
+
 
 function App() {
   return (
@@ -15,6 +19,9 @@ function App() {
           <Route path="/" element={<Inicio/>} />
           <Route path="/Login" element={<Login/>}/>
           <Route path="/VerPerfil" element={<VerPerfil/>}/>
+          <Route path="/DarAlta" element={<DarAlta/>}/>
+          <Route path="/VerPerfil/Desconectar" element={<Desconectar/>}/>
+          <Route path="/VerPerfil/Comunidades" element={<Comunidades/>}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AuthProvider>
