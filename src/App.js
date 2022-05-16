@@ -11,6 +11,9 @@ import DarAlta from "./pages/DarAlta";
 import Comunidades from "./pages/Comunidades";
 import Usuarios from "./pages/Usuarios";
 import Alta from "./pages/Alta";
+import Noticias from "./pages/Noticias"
+import NoticiaNueva from "./pages/NoticiaNueva"
+
 
 
 function App() {
@@ -26,6 +29,8 @@ function App() {
           <Route path="/VerPerfil/Comunidades" element={<Comunidades/>}/>
           <Route path="/VerPerfil/Usuarios" element={<Usuarios/>}/>
           <Route path="/VerPerfil/Usuarios/Alta" element={<Alta/>}/>
+          <Route path="/VerPerfil/Noticias" element={<Noticias/>}/>
+          <Route path="/VerPerfil/Noticias/Nueva" element={<NoticiaNueva/>}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AuthProvider>

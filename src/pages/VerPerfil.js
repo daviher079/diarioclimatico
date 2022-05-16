@@ -39,7 +39,7 @@ export default function VerPerfil() {
       .then((response) => response.json())
       .then((response) => {
         if (response.rol === "ADMIN") {
-          const admin = ["Comunidades", "Usuarios", "Desconectar"];
+          const admin = ["Comunidades", "Usuarios", "Noticias", "Desconectar"];
           setOpciones(admin);
         }
         if (response.rol === "USUARIO") {
