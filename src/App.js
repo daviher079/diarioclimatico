@@ -9,6 +9,8 @@ import { AuthProvider } from "./context/authContext";
 import VerPerfil from "./pages/VerPerfil";
 import DarAlta from "./pages/DarAlta";
 import Comunidades from "./pages/Comunidades";
+import Usuarios from "./pages/Usuarios";
+import Alta from "./pages/Alta";
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route path="/DarAlta" element={<DarAlta/>}/>
           <Route path="/VerPerfil/Desconectar" element={<Desconectar/>}/>
           <Route path="/VerPerfil/Comunidades" element={<Comunidades/>}/>
+          <Route path="/VerPerfil/Usuarios" element={<Usuarios/>}/>
+          <Route path="/VerPerfil/Usuarios/Alta" element={<Alta/>}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AuthProvider>
