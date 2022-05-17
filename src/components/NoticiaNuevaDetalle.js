@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export default function NoticiaNuevaDetalle() {
-  const navigate = useNavigate();
-  const [vacioApeUno, setVacioApeUno] = useState("none");
 
-  const [tipo, setTipo] = useState()
-  
+  var mailSession = sessionStorage.getItem("userName");
+  const navigate = useNavigate();
+  const [vacioCuerpo, setVacioCuerpo] = useState("none");
+  const [vacioTitulo, setVacioTitulo] = useState("none");
+
+  const [tipo, setTipo] = useState("Cambio Climatico")
+  const [miId, setId] = useState(0);
   const [noticia, setNotica] = useState({
     titulo: "",
     cuerpo: ""
@@ -16,20 +19,40 @@ export default function NoticiaNuevaDetalle() {
     setNotica({ ...noticia, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const tiempoTranscurrido = Date.now();
-    const hoy = new Date(tiempoTranscurrido);
-    const fecha = hoy.toLocaleDateString();
 
+  useEffect(() => {
+    misDatos();
+  }, []);
+  const misDatos = async () => {
+    let peticion = `http://localhost:8080/usuarios/findN/${mailSession}`;
+    return await fetch(peticion, {
+      method: "GET",
+    })
+    .then((response) => response.json())
+      .then((response) => {
+        console.log("hola")
+        setId(response.id);
+      });
+  
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("despues de mis noticias")
+    misDatos();
+    const moment = require('moment');
+    let fecha = moment().format('YYYY-MM-DD');
+
+    
+    console.log("44"+miId);
     axios.post('http://localhost:8080/noticias/save', {
         titulo: noticia.titulo,
         cuerpo: noticia.cuerpo,
         usuario: {
-            id:1
+            id:miId
         },
-        tipo: "Cambio climatico",
-        fecha:  "2019-07-04 20:38:38"
+        tipo: tipo,
+        fecha: fecha
     })
       .then(function (response) {
           if(response.status===200){
@@ -41,13 +64,18 @@ export default function NoticiaNuevaDetalle() {
         
       })
       .catch(function (error) {
-        console.log(error.response.data);
+        console.log(error.response);
         console.log("errooooor")
         
-        setVacioApeUno("none");
+        setVacioCuerpo("none");
+        setVacioTitulo("none");
         
-        if(error.response.data.apeUno===""){
-            setVacioApeUno("block");
+        if(error.response.data.titulo===""){
+            setVacioTitulo("block");
+        }
+
+        if(error.response.data.cuerpo===""){
+          setVacioCuerpo("block");
         }
         
         
@@ -58,12 +86,15 @@ export default function NoticiaNuevaDetalle() {
   };
 
 
-  const errorVacioApeUno = {
+  const errorVacioTitulo = {
     color: "red",
-    display: vacioApeUno,
+    display: vacioTitulo,
   };
 
-
+  const errorVacioCuerpo = {
+    color: "red",
+    display: vacioCuerpo,
+  };
 
 
   return (
@@ -93,13 +124,16 @@ export default function NoticiaNuevaDetalle() {
                     value={noticia.titulo}
                   />
                  
+                 <p style={errorVacioTitulo}>
+                    Error. El campo no puede estar vacio
+                  </p>
                 </div>
                 <div className="col-md-6 form-group mb-3">
                   <label className="col-form-label" htmlFor="nombre">
                     Tipo de Noticia
                   </label>
                   <select className="form-select form-select-lg col-lg-12" onChange={(evento)=>{setTipo(evento.target.value)}} aria-label=".form-select-lg example">
-                    <option value="Cambio Climatico">Cambio climatico</option>
+                    <option value="Cambio Climatico" >Cambio climatico</option>
                     <option value="Contaminacion">Contaminación</option>
                     <option value="Energia no Renovable">Energia no Renovable</option>
                     <option value="Energia Renovable">Energia Renovable</option>
@@ -113,7 +147,7 @@ export default function NoticiaNuevaDetalle() {
                   <label className="col-form-label" htmlFor="apeUno">
                     Cuerpo
                   </label>
-                  <textarea name="cuerpo" rows="10" cols="50" placeholder="Primer apellido"
+                  <textarea name="cuerpo" rows="10" cols="50" placeholder="Introducir texto..."
                     className="form-control input-md"
                     required={true}
                     onChange={handleChange}
@@ -121,7 +155,7 @@ export default function NoticiaNuevaDetalle() {
 
                   </textarea>
                  
-                  <p style={errorVacioApeUno}>
+                  <p style={errorVacioCuerpo}>
                     Error. El campo no puede estar vacio
                   </p>
                 </div>

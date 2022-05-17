@@ -49,8 +49,7 @@ export default function NuevoUsuarioAdm(){
           })
           .then(function (response) {
 			  if(response.status===200){
-				sessionStorage.setItem("userName", user.userName);
-				console.log(sessionStorage.getItem("userName"))
+				
 				console.log(response);
 				navigate("/VerPerfil/Usuarios");
 			  }
