@@ -30,7 +30,7 @@ export default function NoticiaNuevaDetalle() {
     })
     .then((response) => response.json())
       .then((response) => {
-        console.log("hola")
+        
         setId(response.id);
       });
   
@@ -38,13 +38,12 @@ export default function NoticiaNuevaDetalle() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("despues de mis noticias")
-    misDatos();
+    
+    
     const moment = require('moment');
     let fecha = moment().format('YYYY-MM-DD');
 
-    
-    console.log("44"+miId);
+  
     axios.post('http://localhost:8080/noticias/save', {
         titulo: noticia.titulo,
         cuerpo: noticia.cuerpo,
