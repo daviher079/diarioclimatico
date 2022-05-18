@@ -54,12 +54,7 @@ function Header() {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
-        <Nav.Item>
-          <Nav.Link className="text-dark" href="/home">
-            {" "}
-            Comparador
-          </Nav.Link>
-        </Nav.Item>
+       
         <Nav.Item>
         <Link
             to={`${login.url}`}

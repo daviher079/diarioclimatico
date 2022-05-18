@@ -6,10 +6,15 @@ import Button from "react-bootstrap/Button";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Comunidad(props) {
   const { comunidades } = props;
   const [nombre, setNombre] = useState("");
+  const[nombreDetalle, setNombreDetalle] =useState("");
+  const navigate = useNavigate();
+  const [id, setId]= useState(0);
 
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
@@ -35,9 +40,16 @@ export default function Comunidad(props) {
   const[er03, setEr03]=useState(0);
   const[er04, setEr04]=useState(0);
 
+  const[res01, setRes01]=useState(0);
+  const[res02, setRes02]=useState(0);
+  const[res03, setRes03]=useState(0);
+  const[res04, setRes04]=useState(0);
+  const[res05, setRes05]=useState(0);
+
   const handleClose = () => setShow(false);
   function handleShow(breakpoint, opcion) {
     setNombre(opcion.nombre);
+    setId(opcion.id);
     setFullscreen(breakpoint);
     datosComunidad(opcion.nombre);
     setShow(true);
@@ -53,6 +65,8 @@ export default function Comunidad(props) {
       .then((response) => response.json())
       .then((response) => {
        console.log(response)
+        setNombreDetalle(response.nombre);
+        setId(response.id);
         setCc01(response.cambioClimatico.cc01);
         setCc02(response.cambioClimatico.cc02);
         setCc03(response.cambioClimatico.cc03);
@@ -73,8 +87,61 @@ export default function Comunidad(props) {
         setEr02(response.energiaRenovable.er02);
         setEr03(response.energiaRenovable.er03);
         setEr04(response.energiaRenovable.er04);
+
+        setRes01(response.residuos.res01);
+        setRes02(response.residuos.res02);
+        setRes03(response.residuos.res03);
+        setRes04(response.residuos.res04);
+        setRes05(response.residuos.res05);
       });
   };
+
+  function actualizaCC() {
+    console.log(res05);
+    console.log(nombreDetalle);
+    console.log(id);
+
+   
+  }
+  
+
+  const handleSubmit = async (e) => {
+    
+    e.preventDefault();
+    actualizaCC();
+    let peticion = "http://localhost:8080/comunidades/cambioClimatico/update";
+    
+   
+
+    try {
+      const { data } = await axios.put(peticion, {
+        cc01: cc01,
+        cc02: cc02,
+        cc03: cc03,
+        cc04: cc04,
+        cc05: cc05,
+        comunidad: {
+          id: id,
+          nombre: nombreDetalle,
+          cambioClimatico: null,
+          contaminacion: null,
+          energiaRenovable: null,
+          energiaNoRenovable: null,
+          residuos: null
+        },
+        
+      });
+      
+      if (data === "ok") {
+        
+        navigate("/VerPerfil");
+        setShow(false);
+      }
+    } catch (error) {
+      console.error(error.response.data);
+      
+    }
+  }
 
   return (
     <Container>
@@ -100,18 +167,19 @@ export default function Comunidad(props) {
         </Modal.Header>
         <Modal.Body>
           <Tabs
-            defaultActiveKey="home"
+            defaultActiveKey="cambioClimatico"
             id="uncontrolled-tab-example"
             className="mb-3"
           >
-            <Tab eventKey="cambioClimatico" title="CambioClimatico">
+            <Tab eventKey="cambioClimatico" title="Cambio Climatico">
             <form method="put">
         <section>
-          <label htmlFor="enr01">
+          <label htmlFor="cc01">
             Niveles de CO2
             <input
               type="number"
-              name="enr01"
+              name="cc01"
+              min={1}
               value={cc01}
               onChange={(evento)=>{setCc01(evento.target.value)}}
             />
@@ -124,6 +192,7 @@ export default function Comunidad(props) {
             <input
               type="number"
               name="cc02"
+              min={1}
               value={cc02}
               onChange={(evento)=>{setCc02(evento.target.value)}}
             />
@@ -136,7 +205,7 @@ export default function Comunidad(props) {
             <input
               type="number"
               name="cc03"
-              
+              min={1}
               value={cc03}
               onChange={(evento)=>{setCc03(evento.target.value)}}
             />
@@ -149,6 +218,7 @@ export default function Comunidad(props) {
             <input
               type="number" name="cc04" 
               value={cc04}
+              min={1}
               onChange={(evento)=>{setCc04(evento.target.value)}}
             />
           </label>
@@ -161,6 +231,7 @@ export default function Comunidad(props) {
               type="number"
               name="cc05"
               value={cc05}
+              min={1}
               onChange={(evento)=>{setCc05(evento.target.value)}}
             />
           </label>
@@ -176,6 +247,7 @@ export default function Comunidad(props) {
             <input
               type="number"
               name="co01"
+              min={1}
               value={co01}
               onChange={(evento)=>{setCo01(evento.target.value)}}
             />
@@ -200,7 +272,7 @@ export default function Comunidad(props) {
             <input
               type="number"
               name="co03"
-              
+              min={1}
               value={co03}
               onChange={(evento)=>{setCo03(evento.target.value)}}
             />
@@ -213,13 +285,14 @@ export default function Comunidad(props) {
             <input
               type="text" name="co04" 
               value={co04}
+
               onChange={(evento)=>{setCo04(evento.target.value)}}
             />
           </label>
         </section>
 </form>
             </Tab>
-            <Tab eventKey="EnergiaRenovable" title="Energía Renovable">
+            <Tab eventKey="energiaNoRenovable" title="Energía No Renovable">
             <form method="put">
             <section>
           <label htmlFor="enr01">
@@ -227,6 +300,7 @@ export default function Comunidad(props) {
             <input
               type="number"
               name="enr01"
+              min={1}
               value={enr01}
               onChange={(evento)=>{setEnr01(evento.target.value)}}
             />
@@ -251,7 +325,7 @@ export default function Comunidad(props) {
             <input
               type="number"
               name="enr03"
-              
+              min={1}
               value={enr03}
               onChange={(evento)=>{setEnr03(evento.target.value)}}
             />
@@ -264,20 +338,22 @@ export default function Comunidad(props) {
             <input
               type="number" name="enr04" 
               value={enr04}
+              min={1}
               onChange={(evento)=>{setEnr04(evento.target.value)}}
             />
           </label>
         </section>
             </form>
             </Tab>
-            <Tab eventKey="EnergiaRenovable" title="Energia Renovable">
+            <Tab eventKey="energiaRenovable" title="Energía Renovable">
             <form method="put">
             <section>
           <label htmlFor="er01">
-            Nivel de petroleo
+            Potencia eólica
             <input
               type="number"
               name="er01"
+              min={1}
               value={er01}
               onChange={(evento)=>{setEr01(evento.target.value)}}
             />
@@ -286,10 +362,11 @@ export default function Comunidad(props) {
 
         <section>
           <label htmlFor="er02">
-            Nivel de uranio
+            Potencia solar fotovoltaica
             <input
               type="number"
               name="er02"
+              min={1}
               value={er02}
               onChange={(evento)=>{setEr02(evento.target.value)}}
             />
@@ -298,11 +375,11 @@ export default function Comunidad(props) {
 
         <section>
           <label htmlFor="er03">
-            Niveles de gas natural
+            Potencia solar termica
             <input
               type="number"
               name="er03"
-              
+              min={1}
               value={er03}
               onChange={(evento)=>{setEr03(evento.target.value)}}
             />
@@ -311,24 +388,94 @@ export default function Comunidad(props) {
 
         <section>
           <label htmlFor="er04">
-            Nivel de carbón
+            Potencia hidraulica
             <input
               type="number" name="er04" 
               value={er04}
+              min={1}
               onChange={(evento)=>{setEr04(evento.target.value)}}
             />
           </label>
         </section>
             </form>
             </Tab>
-            <Tab eventKey="contact" title="Contact"></Tab>
+            <Tab eventKey="residuos" title="Residuos">
+
+            <form method="put">
+        <section>
+          <label htmlFor="res01">
+            Res. urbanos recogidos por habitante
+            <input
+              type="number"
+              name="res01"
+              min={1}
+              value={res01}
+              onChange={(evento)=>{setRes01(evento.target.value)}}
+            />
+          </label>
+        </section>
+
+        <section>
+          <label htmlFor="res02">
+          	Res. mezclados recogidos por habitante 
+            <input
+              type="number"
+              min={1}
+              name="res02"
+              value={res02}
+              onChange={(evento)=>{setRes02(evento.target.value)}}
+            />
+          </label>
+        </section>
+
+        <section>
+          <label htmlFor="res03">
+          	Res. de papel y cartón recogidos por habitante 
+            <input
+              type="number"
+              name="res03"
+              min={1}
+              value={res03}
+              onChange={(evento)=>{setRes03(evento.target.value)}}
+            />
+          </label>
+        </section>
+
+        <section>
+          <label htmlFor="res04">
+          	Res. de vidrio recogidos por habitante 
+            <input
+              type="number" name="res04" 
+              value={res04}
+              min={1}
+              onChange={(evento)=>{setRes04(evento.target.value)}}
+            />
+          </label>
+        </section>
+
+        <section>
+          <label htmlFor="res05">
+          Envases mixtos y embalajes mezclados recogidos por habitante  
+            <input
+              type="number"
+              name="res05"
+              value={res05}
+              min={1}
+              onChange={(evento)=>{setRes05(evento.target.value)}}
+            />
+          </label>
+        </section>
+        
+        </form>
+
+            </Tab>
           </Tabs>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleSubmit}>
             Save Changes
           </Button>
         </Modal.Footer>
