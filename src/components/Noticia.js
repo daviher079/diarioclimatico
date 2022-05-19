@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../assets/css/usuario.css"
 function Noticia() {
   const [noticias, setNoticias] = useState([]);
   var mailSession = sessionStorage.getItem("userName");
@@ -22,6 +23,11 @@ function Noticia() {
 
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
+
+  const [fullscreenClose, setFullscreenClose] = useState(true);
+  const [showClose, setShowClose] = useState(false);
+
+  const handleCloseDelete = () => setShowClose(false);
 
   const opciones = [
     "Cambio climatico",
@@ -120,26 +126,38 @@ function Noticia() {
     display: vacioFecha,
   };
 
-  const handleSubmitDelete = async (e, noticia)=>{
-    e.preventDefault();
-    console.log(noticia.id)
-    //let peticion = `http://localhost:8080/usuarios/delete/${id}`;
+  function handleDelete (breakpoint, noticia){
+    
+    
+    setIdNoticia(noticia.id);
+
+    setFullscreenClose(breakpoint);
+  
+    setShowClose(true);
+    
+};
+
+const handleSubmitDelete = async (e)=>{
+  e.preventDefault();
+  console.log(idNoticia)
+
+  let peticion = `http://localhost:8080/noticias/delete/${idNoticia}`;
 
 
-    /*return await fetch(peticion, { method: 'DELETE' })
+    return await fetch(peticion, { method: 'DELETE' })
     .then((response) => {
       console.log(response)
       if(response.status===200){
         
-        navigate("/VerPerfil/Usuarios");
+        navigate("/VerPerfil/Noticias");
         setShowClose(false);
-        misUsuarios();
+        misNoticias();
       }
-    });*/
+    });
 };
 
   return (
-    <div className="d-flex justify-content-center row">
+    <div className="d-flex justify-content-center row caja">
       <div className=" col-md-12 col-sm-8 col-xl-12 ">
         <div className="rounded">
           <div className="table-responsive table-borderless">
@@ -178,7 +196,7 @@ function Noticia() {
                         <Button
                           size="lg"
                           className="btn btn-warning"
-                           onClick={(ev) => handleSubmitDelete(ev, noticia)}
+                           onClick={(ev) => handleDelete(ev, noticia)}
                         >
                           Borrar noticia
                         </Button>
@@ -282,7 +300,28 @@ function Noticia() {
               </Modal.Footer>
             </Modal>
 
-            
+            <Modal
+                show={showClose}
+                onHide={handleClose}
+                fullscreen={fullscreenClose}
+                aria-labelledby="example-modal-sizes-title-lg"
+              >
+                <Modal.Header>
+                  <Modal.Title>Borrar Usuario</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+
+                    <p>¿Desea eliminar este usuario?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleCloseDelete}>
+                    Cancelar
+                  </Button>
+                  <Button variant="primary" onClick={handleSubmitDelete}>
+                    Eliminar
+                  </Button>
+                </Modal.Footer>
+              </Modal>
 
 
 

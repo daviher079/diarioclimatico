@@ -1,0 +1,35 @@
+.estiloAside{
+    padding: 20px;
+}
+
+.botonAside{
+   color: #ef476e;
+}
+
+.botonAside:hover{
+    color: white;
+}
+
+.nombre{
+    color: #ef476e; 
+}
+
+.lista{
+    list-style: none;
+    padding: 15px;
+    color: #ef476e;
+}
+
+.item{
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ef476e !important;
+}
+
+.item:hover{
+    color: white;
+}
+
+.btnVerPerfil:hover{
+    color: white;
+}

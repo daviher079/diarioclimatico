@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {Link} from 'react-router-dom'
 export default function NuevoUsuarioAdm(){
 
     const navigate = useNavigate();
@@ -242,10 +243,14 @@ export default function NuevoUsuarioAdm(){
 						</div>
 
 						<div className="row">
-							<div className="col-md-12 form-group">
+							<div className="col-md-6 form-group mb-3">
                             <button onClick={handleSubmit} className="btn btn-primary rounded-0 py-2 px-4">
                                 Crear Usuario
                             </button>
+							</div>
+							<div className="col-md-6 form-group mb-3 d-flex flex-row-reverse">
+								<Link to="/VerPerfil/Usuarios">Volver</Link>
+
 							</div>
 						</div>
 					</form>

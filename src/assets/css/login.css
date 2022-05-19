@@ -177,7 +177,7 @@ svg {
   vertical-align: middle; }
 
 table {
-  border-collapse: collapse; }
+  border-collapse: inherit; }
 
 caption {
   padding-top: 0.75rem;
@@ -480,8 +480,8 @@ pre {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+  /*-ms-flex-wrap: wrap;*/
+  /*flex-wrap: wrap;*/
   margin-right: -15px;
   margin-left: -15px; }
 
@@ -1338,6 +1338,7 @@ pre {
 .table {
   width: 100%;
   margin-bottom: 1rem;
+  border-spacing: 40px 0px;
   color: #212529; }
   .table th,
   .table td {
@@ -8118,7 +8119,7 @@ a.text-dark:hover, a.text-dark:focus {
   .badge {
     border: 1px solid #000; }
   .table {
-    border-collapse: collapse !important; }
+    border-collapse: inherit !important; }
     .table td,
     .table th {
       background-color: #fff !important; }

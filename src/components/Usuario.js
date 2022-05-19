@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import "../assets/css/usuario.css"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -177,7 +178,7 @@ function Usuario() {
       display: vacioMail
     };
     return(
-        <div className="d-flex justify-content-center row">
+        <div className="d-flex justify-content-center row caja">
         <div className=" col-md-12 col-sm-8 col-xl-12 ">
           <div className="rounded">
             <div className="table-responsive table-borderless">

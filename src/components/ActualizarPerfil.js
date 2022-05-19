@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Button from 'react-bootstrap/Button'
+import Button from "react-bootstrap/Button";
+import "../assets/css/actualizaPerfil.css"
 
 function ActualizarPerfil() {
   var mailSession = sessionStorage.getItem("userName");
@@ -12,53 +13,39 @@ function ActualizarPerfil() {
   const [apeUno, setApeUno] = useState("");
   const [apeDos, setApeDos] = useState("");
   const [password, setPassword] = useState("");
-  const [enabled, setEnabled]= useState();
+  const [enabled, setEnabled] = useState();
   const [rol, setRol] = useState();
   const [id, setId] = useState();
   const [userName, setUserName] = useState("");
   const [fechaNacimiento, setFechaNacimiento] = useState("");
 
-
-
   useEffect(() => {
-
     misDatos();
-
-  }, [])
-  
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let peticion = `http://localhost:8080/usuarios/update/${id}`;
-    
 
     try {
-
-      const { data } = await axios.put(
-        peticion,
-        {
-          nombre,
-          apeUno,
-          apeDos,
-          mail,
-          password,
-          userName,
-          fechaNacimiento,
-          rol,
-          enabled
-        }
-      );
-      if(data==="ok"){
+      const { data } = await axios.put(peticion, {
+        nombre,
+        apeUno,
+        apeDos,
+        mail,
+        password,
+        userName,
+        fechaNacimiento,
+        rol,
+        enabled,
+      });
+      if (data === "ok") {
         console.log(data);
         navigate("/VerPerfil");
       }
     } catch (error) {
-      console.error(error.response.data); 
+      console.error(error.response.data);
     }
-
-
-
-
   };
 
   const misDatos = async () => {
@@ -79,8 +66,6 @@ function ActualizarPerfil() {
         setFechaNacimiento(response.fechaNacimiento);
         setRol(response.rol);
         setId(response.id);
-
-       
       });
   };
 
@@ -89,99 +74,130 @@ function ActualizarPerfil() {
 
   const handleEnabled = (e) => {
     e.preventDefault();
-    if(isHabilitado===false){
+    if (isHabilitado === false) {
       setDisabled(false);
       setHabilitado(true);
-
-    }else{
+    } else {
       setDisabled(true);
       setHabilitado(false);
     }
-
-  }
+  };
 
   return (
-    <div className="container">
+    <div className="caja">
       <Button onClick={handleEnabled}>Editar</Button>
-      <form method="put">
-        <section>
-          <label htmlFor="mail">
-            Email
-            <input
-              type="email"
-              name="mail"
-              disabled={isDisabled}
-              value={mail}
-              onChange={(evento)=>{setMail(evento.target.value)}}
-            />
-          </label>
-        </section>
+      <div className="row align-items-stretch no-gutters contact-wrap">
+        <div className="col-md-12">
+          <div>
+            <h3 className="titulo">Actualizar perfil</h3>
+            <form method="put" className="form-horizontal mb-5">
+              <div className="row">
+                <div className="col-md-6 form-group mb-3">
+                  <label htmlFor="mail">Email</label>
+                  <input
+                    type="email"
+                    name="mail"
+                    disabled={isDisabled}
+                    value={mail}
+                    onChange={(evento) => {
+                      setMail(evento.target.value);
+                    }}
+                  />
+                </div>
 
-        <section>
-          <label htmlFor="nombre">
-            Nombre
-            <input
-              type="text"
-              name="nombre"
-              value={nombre}
-              disabled={isDisabled}
-              onChange={(evento)=>{setNombre(evento.target.value)}}
-            />
-          </label>
-        </section>
+                <div className="col-md-6 form-group mb-3">
+                  <label htmlFor="nombre">Nombre</label>
+                  <input
+                    type="text"
+                    name="nombre"
+                    value={nombre}
+                    disabled={isDisabled}
+                    onChange={(evento) => {
+                      setNombre(evento.target.value);
+                    }}
+                  />
+                </div>
+              </div>
 
-        <section>
-          <label htmlFor="apeUno">
-            Primer apellido
-            <input
-              type="text"
-              name="apeUno"
-              disabled={isDisabled}
-              value={apeUno}
-              onChange={(evento)=>{setApeUno(evento.target.value)}}
-            />
-          </label>
-        </section>
+              <div className="row">
+                <div className="col-md-6 form-group mb-3">
+                <label htmlFor="apeUno">
+                  Primer apellido
+                  
+                </label>
+                <input
+                    type="text"
+                    name="apeUno"
+                    disabled={isDisabled}
+                    value={apeUno}
+                    onChange={(evento) => {
+                      setApeUno(evento.target.value);
+                    }}
+                  />
+                </div>
 
-        <section>
-          <label htmlFor="apeDos">
-            Segundo Apellido
-            <input
-              type="text" name="apeDos" value={apeDos} disabled={isDisabled} onChange={(evento)=>{setApeDos(evento.target.value)}}
-            />
-          </label>
-        </section>
+                <div className="col-md-6 form-group mb-3">
+                <label htmlFor="apeDos">
+                  Segundo Apellido
+                  
+                </label>
+                <input
+                    type="text"
+                    name="apeDos"
+                    value={apeDos}
+                    disabled={isDisabled}
+                    onChange={(evento) => {
+                      setApeDos(evento.target.value);
+                    }}
+                  />
+                </div>
+              </div>
 
-        <section>
-          <label htmlFor="userName">
-            Direccion
-            <input
-              type="text"
-              name="userName"
-              readOnly={true}
-              value={userName}
-              onChange={(evento)=>{setUserName(evento.target.value)}}
-            />
-          </label>
-        </section>
+              <div className="row">
+                <div className="col-md-6 form-group mb-3">
+                <label htmlFor="userName">
+                  Direccion
+                  
+                </label>
+                <input
+                    type="text"
+                    name="userName"
+                    readOnly={true}
+                    value={userName}
+                    onChange={(evento) => {
+                      setUserName(evento.target.value);
+                    }}
+                  />
 
-        <section>
-          <label htmlFor="fNacimiento">
-            Provincia
-            <input
-              type="date"
-              disabled={isDisabled}
-              name="fNacimiento"
-              value={fechaNacimiento}
-              onChange={(evento)=>{setFechaNacimiento(evento.target.value)}}
-            />
-          </label>
-        </section>
+                </div>
 
-        <section className="botonera-login">
-          <button onClick={handleSubmit} disabled={isDisabled} >Actualizar</button>
-        </section>
-      </form>
+                <div className="col-md-6 form-group mb-3">
+                <label htmlFor="fNacimiento">
+                  Provincia
+                  
+                </label>
+                <input
+                    type="date"
+                    disabled={isDisabled}
+                    name="fNacimiento"
+                    value={fechaNacimiento}
+                    onChange={(evento) => {
+                      setFechaNacimiento(evento.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+
+             
+              <section className="botonera-login">
+                <Button onClick={handleSubmit} className="btn btn-outline-dark" disabled={isDisabled}>
+                  Actualizar
+                </Button>
+              </section>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

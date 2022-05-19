@@ -157,7 +157,7 @@ export default function Comunidad() {
       <Row className="container px-4 px-lg-5 mt-5 row-cols-3 row-cols-md-3 row-cols-xl-3 justify-content-center">
         {comunidades.map((comunidad) => {
           return (
-            <Col xs={1} md={4} className="g-4" key={comunidad.nombre}>
+            <Col md={3} key={comunidad.nombre}>
               <Card style={{ width: "18rem" }}>
               <Card.Img variant="top" src="../../assets/img/fondo-01.png" />
                 <Card.Body>
