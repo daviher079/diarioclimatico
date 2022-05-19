@@ -7,7 +7,7 @@ function Inicio() {
 
   
   return (
-    <div className="container">
+    <div>
       <Header></Header>
       
      <Mapa/>

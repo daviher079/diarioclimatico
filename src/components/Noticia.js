@@ -82,7 +82,8 @@ function Noticia() {
       });
       if (data === "ok") {
         console.log(data);
-        navigate("/VerPerfil");
+        misNoticias();
+        navigate("/VerPerfil/Noticias");
         setShow(false);
       }
     } catch (error) {
@@ -118,6 +119,24 @@ function Noticia() {
     color: "red",
     display: vacioFecha,
   };
+
+  const handleSubmitDelete = async (e, noticia)=>{
+    e.preventDefault();
+    console.log(noticia.id)
+    //let peticion = `http://localhost:8080/usuarios/delete/${id}`;
+
+
+    /*return await fetch(peticion, { method: 'DELETE' })
+    .then((response) => {
+      console.log(response)
+      if(response.status===200){
+        
+        navigate("/VerPerfil/Usuarios");
+        setShowClose(false);
+        misUsuarios();
+      }
+    });*/
+};
 
   return (
     <div className="d-flex justify-content-center row">
@@ -159,9 +178,9 @@ function Noticia() {
                         <Button
                           size="lg"
                           className="btn btn-warning"
-                          // onClick={(ev) => handleDelete(ev, usuario)}
+                           onClick={(ev) => handleSubmitDelete(ev, noticia)}
                         >
-                          Dar baja
+                          Borrar noticia
                         </Button>
                       </td>
                     </tr>

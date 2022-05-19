@@ -4,7 +4,7 @@ import NuevoUsuario from "../components/NuevoUsuario";
 
 export default function DarAlta(){
     return(
-        <div className="container">
+        <div>
             <Header></Header>
             <NuevoUsuario></NuevoUsuario>
 

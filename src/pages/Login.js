@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../assets/css/login.css"
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import Header from "../components/Header";
 export default function Login() {
 
    const navigate = useNavigate();
@@ -49,8 +50,9 @@ export default function Login() {
       };
 
   return (
-    <section className="ftco-section">
-    <div className="container">
+    
+    <div>
+    <Header></Header>
     <Modal show={show} onHide={handleClose}>
         <Modal.Header >
           <Modal.Title>Login Incorrecto</Modal.Title>
@@ -66,7 +68,7 @@ export default function Login() {
       </Modal>
         <div className="row justify-content-center">
             <div className="col-md-6 text-center mb-5">
-                <h2 className="heading-section">INTRODUCE TUS DATOS</h2>
+               
             </div>
         </div>
         <div className="row justify-content-center">
@@ -76,7 +78,7 @@ export default function Login() {
           
               </div>
                     <div className="login-wrap p-4 p-md-5">
-                    
+                    <h2 className="heading-section">INTRODUCE TUS DATOS</h2>
                         <form method="POST" className="signin-form">
                       <div className="form-group mb-3">
                           <label className="label" htmlFor="userName">Nombre </label>
@@ -107,6 +109,5 @@ export default function Login() {
             </div>
         </div>
     </div>
-</section>
 );
 }

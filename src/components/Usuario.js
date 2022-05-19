@@ -37,7 +37,7 @@ function Usuario() {
 
   
     const misUsuarios = async () => {
-      let peticion = "http://localhost:8080/usuarios/findRol/USUARIO";
+      let peticion = "http://localhost:8080/usuarios/all";
       const peticionInicial = await fetch(peticion);
       const peticionResultados = await peticionInicial.json();
       console.log(peticionResultados);
@@ -92,8 +92,9 @@ function Usuario() {
         console.log(response)
         if(response.status===200){
           
-          navigate("/VerPerfil");
+          navigate("/VerPerfil/Usuarios");
           setShowClose(false);
+          misUsuarios();
         }
       });
   };
@@ -123,8 +124,9 @@ function Usuario() {
         
         if(data==="ok"){
           
-          navigate("/VerPerfil");
+          navigate("/VerPerfil/Usuarios");
           setShow(false);
+          misUsuarios();
         }
       } catch (error) {
         console.error(error.response.data);

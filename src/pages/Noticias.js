@@ -4,7 +4,7 @@ import Noticia from "../components/Noticia"
 export default function Noticias() {
   
   return (
-    <div className="container ">
+    <div>
       <Header></Header>
      <Noticia></Noticia>
     

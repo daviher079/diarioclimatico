@@ -4,7 +4,7 @@ import NoticiaNuevaDetalle from "../components/NoticiaNuevaDetalle";
 
 export default function DarAlta(){
     return(
-        <div className="container">
+        <div>
             <Header></Header>
             <NoticiaNuevaDetalle></NoticiaNuevaDetalle>
 

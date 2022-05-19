@@ -4,7 +4,7 @@ import Usuario from "../components/Usuario"
 export default function Usuarios() {
   
   return (
-    <div className="container ">
+    <div>
       <Header></Header>
 
     <Usuario></Usuario>

@@ -8163,7 +8163,7 @@ h1, h2, h3, h4, h5,
   color: #000; }
 
 .bg-primary {
-  background: #9578bb !important; }
+  background: #073b4c !important; }
 
 .ftco-section {
   padding: 7em 0; }
@@ -8176,7 +8176,7 @@ h1, h2, h3, h4, h5,
 
 .heading-section {
   font-size: 28px;
-  color: #000; }
+  color: #073b4c; }
 
 .img {
     background-image: url("../img/fondo-01.png"); 
@@ -8318,9 +8318,9 @@ h1, h2, h3, h4, h5,
 
 /* Style the checkmark/indicator */
 .checkbox-primary {
-  color: #9578bb; }
+  color: #073b4c; }
   .checkbox-primary input:checked ~ .checkmark:after {
-    color: #9578bb; }
+    color: #073b4c; }
 
 .btn {
   cursor: pointer;
@@ -8331,9 +8331,10 @@ h1, h2, h3, h4, h5,
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
   .btn.btn-primary {
-    background: #9578bb !important;
+    background: #073b4c !important;
     border: 1px solid #9578bb !important;
-    color: #fff !important; }
+    font-size: 1.2em;
+    color: #ef476f !important; }
     .btn.btn-primary:hover {
       border: 1px solid #9578bb;
       background: transparent;

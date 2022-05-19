@@ -7,15 +7,31 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function VerPerfil() {
+
+  const [mostrarOcultar, setMostrarOcultar] = useState("block");
+  const [isHabilitado, setHabilitado] = useState(true);
   const sectionStyle = {
     display: "flex",
     width: "300px",
   };
 
+  const handleMostrarOcultar = (e) => {
+    e.preventDefault();
+    if(isHabilitado===false){
+      setMostrarOcultar("block");
+      setHabilitado(true);
+
+    }else{
+      setMostrarOcultar("none");
+      setHabilitado(false);
+    }
+  }  
+
   const styleInterfazAside = {
     backgroundColor: "#9578bb",
     width: "300px",
     height: "90vh",
+    display: mostrarOcultar
   };
 
   const styleOpciones = {
@@ -29,6 +45,8 @@ export default function VerPerfil() {
   useEffect(() => {
     misDatos();
   }, []);
+
+
 
   const misDatos = async () => {
     let peticion = `http://localhost:8080/usuarios/findN/${mailSession}`;
@@ -58,6 +76,8 @@ export default function VerPerfil() {
     }
   };
 
+
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -71,8 +91,9 @@ export default function VerPerfil() {
     <div>
       <Header></Header>
 
+
       <section style={sectionStyle}>
-        <aside style={styleInterfazAside}>
+      <aside style={styleInterfazAside}>
           <h5>Hola,{mailSession}</h5>
           <ul>
             {opciones.map((opcion) => (
@@ -88,7 +109,10 @@ export default function VerPerfil() {
             ))}
           </ul>
         </aside>
+      
         <article>
+
+        <button onClick={handleMostrarOcultar}>Mostrar</button>
           <Modal
             show={show}
             onHide={handleClose}

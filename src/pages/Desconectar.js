@@ -10,7 +10,7 @@ export default function Desconectar() {
 
     return(
 
-        <div className="container">
+        <div>
              <Header></Header>
              <h1>Se ha cerrado sesion</h1>
              <button onClick={handleSubmit} 

@@ -3,5 +3,10 @@
 }
 
 .cabecera {
-	background-color: #9578bb;
+	background-color: #073b4c;
+}
+
+.botones{
+	color: #ef476e;
+	font-size: 1.2em;
 }
