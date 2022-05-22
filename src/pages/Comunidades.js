@@ -10,13 +10,13 @@ export default function Comunidades() {
     display: "flex",
     width: "100px",
   };
-
+  
   return (
     <div>
       <Header></Header>
 
       <section style={sectionStyle}>
-        <Aside />
+      <Aside />
         <article>
           <Comunidad />
         </article>

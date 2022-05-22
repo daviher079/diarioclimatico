@@ -1,0 +1,22 @@
+.contenedor{
+    padding: 50px;
+}
+
+
+.estiloNoticia{
+    padding: 10px;
+    display: flex;
+    min-width: 40vw;
+    margin-bottom: 15px;
+    border: solid 1px #ef476e;
+    border-radius: 10px;
+}
+
+.datos{
+    margin-left: 15px;
+}
+
+
+h3, h5, p{
+    color: #073b4c
+}

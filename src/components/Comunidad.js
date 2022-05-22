@@ -5,14 +5,12 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
-
 export default function Comunidad() {
-  
   const [nombre, setNombre] = useState("");
   const [nombreDetalle, setNombreDetalle] = useState("");
   const navigate = useNavigate();
@@ -50,20 +48,17 @@ export default function Comunidad() {
 
   const [comunidades, setComunidades] = useState([]);
 
-    useEffect(()=>
-    {
-      
-      misComunidades()
-    }, []);
+  useEffect(() => {
+    misComunidades();
+  }, []);
 
-    const misComunidades = async() =>
-      {
-        let peticion ='http://localhost:8080/comunidades/all';
-        const peticionInicial = await fetch(peticion);
-        const peticionResultados = await peticionInicial.json();
-        
-        setComunidades(peticionResultados);
-      }
+  const misComunidades = async () => {
+    let peticion = "http://localhost:8080/comunidades/all";
+    const peticionInicial = await fetch(peticion);
+    const peticionResultados = await peticionInicial.json();
+
+    setComunidades(peticionResultados);
+  };
 
   const handleClose = () => setShow(false);
   function handleShow(breakpoint, opcion) {
@@ -135,7 +130,7 @@ export default function Comunidad() {
         },
       })
       .then((data) => {
-        console.log(data.data)
+        console.log(data.data);
         if (data.data === "ok") {
           navigate("/VerPerfil/Comunidades");
           misComunidades();
@@ -152,30 +147,37 @@ export default function Comunidad() {
     actualizaCC();
   };
 
+  const tabsKeys = Object.keys(comunidades);
+  const [activeTab, setActiveTab] = useState(tabsKeys[0]);
   return (
     <Container>
-      <Row className="container px-4 px-lg-5 mt-5 row-cols-3 row-cols-md-3 row-cols-xl-3 justify-content-center">
-        {comunidades.map((comunidad) => {
-          return (
-            <Col md={3} key={comunidad.nombre}>
-              <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src="../../assets/img/fondo-01.png" />
-                <Card.Body>
-                  <Card.Title>{comunidad.nombre}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">
-                    
-                    
-                  </Card.Subtitle>
+      <section className="py-5">
+        <div className="container px-4 px-lg-5 mt-5">
+          {comunidades.map((comunidad) => {
+            return (
+              <div
+                key={comunidad.id}
+                className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+              >
+                <div className="col mb-5">
+                  <div className="card h-100">
+                    <div className="card-body p-4">
+                      <div className="text-center">
+                        <h5 className="fw-bolder">{comunidad.nombre}</h5>
 
-                  <Card.Link className="btn btn-outline-dark" onClick={(v) => handleShow(v, comunidad)}>
-                    Actualizar
-                  </Card.Link>
-                </Card.Body>
-              </Card>
-            </Col>
-          );
-        })}
-      </Row>
+                        <Button onClick={(v) => handleShow(v, comunidad)}>
+                          Actualizar
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       <Modal
         show={show}
         onHide={handleClose}

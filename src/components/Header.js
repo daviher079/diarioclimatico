@@ -46,13 +46,12 @@ function Header() {
               
             >
               {opciones.map((opcion) => (
-                <Link
-                  to={`/noticias/${opcion}`}
+                 <a href={`/noticias/${opcion}`}
                   key={opcion}
                   style={{ textDecoration: "none", textAlign: "center" }}
                 >
                   <p className="text-dark"> {opcion}</p>
-                </Link>
+                </a>
               ))}
             </NavDropdown>
           </Nav>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "../assets/css/aside.css"
-import { BsArrowBarRight, BsArrowBarLeft } from "react-icons/bs";
+import { BsArrowBarLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 export default function VerPerfil() {
@@ -18,7 +18,6 @@ export default function VerPerfil() {
   const [mostrarOcultar, setMostrarOcultar] = useState("225px");
   const [mostrarOcultarH5, setMostrarOcultarhH5] = useState("block");
   const [mostrarOcultarUL, setMostrarOcultarhUL] = useState("block");
-  const [boton, setBoton] = useState("BsArrowBarLeft");
 
   const styleH5 = {
     display: mostrarOcultarH5,
@@ -46,7 +45,7 @@ export default function VerPerfil() {
   const styleInterfazAside = {
     backgroundColor: "#073b4c",
     width: mostrarOcultar,
-    height: "100%",
+    height: "100vh",
     //display: mostrarOcultar
   };
 

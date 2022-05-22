@@ -26,10 +26,47 @@
     color: #ef476e !important;
 }
 
+.itemDos{
+    font-size: 1em;
+    font-weight: bold;
+    color: #ef476e !important;
+}
+
+.boton:hover{
+    cursor: pointer;
+    color: #ef476e;
+}
+
 .item:hover{
     color: white;
 }
 
 .btnVerPerfil:hover{
     color: white;
+}
+
+.imgFondo{
+    width: 100%;
+    height: 200px;
+    background-image: url("../img/fondo-01.png"); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+}
+
+.art{
+    padding: 50px;
+    width: 100vw;
+}
+
+.art h1{
+    color: #ef476e;
+    font-size: 4.3em;
+}
+
+.art h5{
+    margin-bottom: 50px;
+    color: currentcolor;
+    font-size: 1em;
 }

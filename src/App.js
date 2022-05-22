@@ -13,6 +13,8 @@ import Usuarios from "./pages/Usuarios";
 import Alta from "./pages/Alta";
 import Noticias from "./pages/Noticias"
 import NoticiaNueva from "./pages/NoticiaNueva"
+import NoticiasCampo from "./pages/NoticiasCampo";
+import NoticiaDetalle from "./pages/NoticiaDetalle";
 
 
 
@@ -31,6 +33,8 @@ function App() {
           <Route path="/VerPerfil/Usuarios/Alta" element={<Alta/>}/>
           <Route path="/VerPerfil/Noticias" element={<Noticias/>}/>
           <Route path="/VerPerfil/Noticias/Nueva" element={<NoticiaNueva/>}/>
+          <Route path="/noticias/:campo" element={<NoticiasCampo />}/>
+          <Route path="/noticias/:campo/:id" element={<NoticiaDetalle />}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AuthProvider>
