@@ -52,6 +52,11 @@ export default function VerPerfil() {
   ];
 
 
+  /**
+   * Este apartado mustran los tipos de noticias que hay en la pagina y le
+   * ofrece al usuario la opción de filtrar y mostrar todas las noticias que
+   * contengan ese tipo
+   */
   
 
 

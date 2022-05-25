@@ -4,7 +4,17 @@ import axios from "axios";
 import {Link} from 'react-router-dom'
 export default function NuevoUsuarioAdm(){
 
+	/**
+	 * La variable navigate es un hook propio de react que se 
+	 * utiliza para dirigir al usuario por las rutas que pueda 
+	 * tener la aplicacion
+	 */
     const navigate = useNavigate();
+	/**
+	 * La declaración de estas variables se usa para manejar 
+	 * los errores que pueda cometer el usuario en caso de poner
+	 * algun campo vacio su estado se cambiará de none a block
+	 */
     const [miDisplay, setMiDisplay] = useState('none');
 	const [miUserName, setMiUserName] = useState('none');
 	const [vacioMail, setVacioMail] = useState('none');
@@ -26,12 +36,33 @@ export default function NuevoUsuarioAdm(){
         fecha:""
     });
 
+
+	/**
+	 * Con el uso de esta funcion se modifica el estado del objeto user 
+	 * con los tres puntos lo que hace es que mantiene el estado anterior
+	 * y modifica el estado del objeto pero manteniendo lo que ya tenia
+	 * a traves de la propiedad target se accede al value y al name ambas 
+	 * son propiedades que tiene el input.
+	 * Se ejecutará cada vez que el input sufra un cambio  
+	 */
     const handleChange = ({target: {name, value}})=>
     {
         setUser({...user, [name]: value});
     }
 
-   
+
+   /**
+	* se hará la petición sobre el servidor en caso de que el usuario 
+	* haya introducido los dos campos de contraseña iguales, en caso de 
+	* devolver un error la peticion entrára por el catch y se comprobará 
+	* si alguno de los campos introducidos por el usuario estaban vacios
+	* en ese caso se mostrarán los mensajes de error sobre los campos que
+	* hayam sido enviados vacios.
+	*
+	* En caso de que la peticion entre por el lado del then es porque el 
+	* usuario ha sido guardado en el servidor y se vuelve al apartado de 
+	* usuarios a traves del navigate
+    */
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,6 +83,10 @@ export default function NuevoUsuarioAdm(){
 			  if(response.status===200){
 				
 				console.log(response);
+
+				/**
+				 * Ejemplo de uso un navigate
+				 */
 				navigate("/VerPerfil/Usuarios");
 			  }
 			  
@@ -163,6 +198,11 @@ export default function NuevoUsuarioAdm(){
         display: vacioUserName
 	  }
 
+
+	  /**
+	   * Este componente devuelve un formulario donde el usuario 
+	   * introducirá sus datos
+	   */
     return(
         <div className="container">
 		<div className="row align-items-stretch no-gutters contact-wrap">

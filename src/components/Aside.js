@@ -8,16 +8,37 @@ import { useNavigate } from "react-router-dom";
 export default function VerPerfil() {
   const [isHabilitado, setHabilitado] = useState(true);
 
+  /**
+   * A traves de esta función cuando el usuario hace clic en cerrar sesión
+   * este será redirigido hacia la página de VerPerfil/Desconectar
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     navigate("/VerPerfil/Desconectar");
   };
 
+  /**
+   * para recoger la variable almacenada en sesión se hace atraves del objeto 
+   * sessionStorage.getItem
+   */
   var mailSession = sessionStorage.getItem("userName");
 
+
+  /**
+   * A traves del uso de estos useState se crean las varaibles que manejaran
+   * la barra lateral, la primera mostrará por defecto la barra y las dos 
+   * siguientes el contenido que tendrá dicha barra
+   * 
+   */
   const [mostrarOcultar, setMostrarOcultar] = useState("225px");
   const [mostrarOcultarH5, setMostrarOcultarhH5] = useState("block");
   const [mostrarOcultarUL, setMostrarOcultarhUL] = useState("block");
+
+  /**
+   * A traves de estas dos funciones se maneja el estilo de la lista y 
+   * la variable de saludo
+   */
+
 
   const styleH5 = {
     display: mostrarOcultarH5,
@@ -26,6 +47,13 @@ export default function VerPerfil() {
   const styleUL = {
     display: mostrarOcultarUL,
   };
+
+  /**
+   * Con esta función se controlará el estado de la barra del boton
+   * haciendo click en el boton se mostrará o se ocultará en función 
+   * de la decisión del usuario
+   * 
+   */
 
   const handleMostrarOcultar = (e) => {
     e.preventDefault();
@@ -42,6 +70,11 @@ export default function VerPerfil() {
     }
   };
 
+  /**
+   * Esta función se cargará en la propiedad de estilo de la barra lateral
+   * 
+   */
+
   const styleInterfazAside = {
     backgroundColor: "#073b4c",
     width: mostrarOcultar,
@@ -55,10 +88,22 @@ export default function VerPerfil() {
 
   const navigate = useNavigate();
 
+
   const [opciones, setOpciones] = useState([]);
+
   useEffect(() => {
     misDatos();
   }, []);
+
+
+  /**
+   * A traves de la función de misDatos se cargarán las opciones que tiene visible
+   * el usuario esto se definirá a traves de su rol en caso de que sea ADMIN tendrá 
+   * un mayor numero de funcionalidades que si es el user
+   * Las opciones se cargaran en el useState de opciones
+   * 
+   * 
+   */
 
   const misDatos = async () => {
     let peticion = `http://localhost:8080/usuarios/findN/${mailSession}`;
@@ -84,6 +129,14 @@ export default function VerPerfil() {
 
   const handleClose = () => setShow(false);
 
+  /**
+   * En caso de pulsar en alguna de las opciones el usuario será dirigido 
+   * a la funcionalidad en la que el haya hecho click. Salvo si el ha 
+   * pulsado sobre la opcion de desconectar en ese caso se mostrará una 
+   * ventana modal para que el usuario decida si desea cerrar sesion
+   * 
+   * 
+   */
   const agregarClick = (e, opcion) => {
     e.preventDefault();
     if (opcion.opcion === "Desconectar") {
@@ -97,6 +150,13 @@ export default function VerPerfil() {
     navigate("/VerPerfil");
   }
 
+  /**
+   * Este componente devuelve una barra lateral con un boton para controlar su estado
+   * un h5 que contiene el saludo del usuario y una lista conm las opciones que puede 
+   * ver dicho usuario
+   * 
+   * 
+   */
   return (
     <div>
       <aside style={styleInterfazAside}>
@@ -105,7 +165,12 @@ export default function VerPerfil() {
         
        <button className="btn" onClick={handleVerPerfil}> <h3 style={styleH5} className="nombre" >Usuario: {mailSession}</h3></button>
         <ul style={styleUL} className="lista">
-          {opciones.map((opcion) => (
+          {
+            /***
+             * Metodo para recorrer y mostrar las opciones que tiene 
+             * visibles el usuario
+             */
+          opciones.map((opcion) => (
             <li key={opcion}>
               <button
                 onClick={(ev) => agregarClick(ev, { opcion })}
@@ -115,7 +180,8 @@ export default function VerPerfil() {
                 {opcion}
               </button>
             </li>
-          ))}
+          ))
+          }
         </ul>
         </div>
         
