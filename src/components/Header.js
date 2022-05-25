@@ -8,6 +8,18 @@ import imagenes from "../assets/imagenes";
 import { useState, useEffect } from "react";
 
 function Header() {
+
+  /**
+   * El componente Header es desde donde se puede acceder a hacer login,
+   * Al inicio de la aplicación y a consultar las noticias que contiene 
+   * la página 
+   */
+
+
+  /**
+   * Dentro de este array estan contenidas las opciones para filtrar la busqueda de las noticias
+   * 
+   */
   const opciones = [
     "Cambio climatico",
     "Contaminacion",
@@ -16,12 +28,29 @@ function Header() {
     "Residuos",
   ];
 
+/**
+ * En este useState está almacenado por defecto para que nos muestre el
+ * boton de hacer login en caso de tener la sesión activa el boton será 
+ * modificado para que nos conduzca a ver el perfil del usuario
+ */
+
   const [login, setLogin] = useState({
     etiqueta: "Login",
     url: "/Login",
   });
 
+  /**
+   * En esta variable se recupera el campo Username del usuario
+   * Necesario para mantener la sesión activa
+   */
   var mailSession = sessionStorage.getItem("userName");
+
+  /**
+   * El useEffect se lleva a cabo en el momento en el que este componente 
+   * sufre algun cambio en caso de sufrir algun cambio y comprobar que la variable 
+   * mailSession no sea null se cambiará el useState de login para mostrar en el
+   * boton la opcion de ver perfil
+   */
   useEffect(() => {
     if (mailSession !== null) {
       setLogin({
@@ -45,7 +74,16 @@ function Header() {
               title="Noticias"
               
             >
-              {opciones.map((opcion) => (
+              {
+                /**
+                 * En el navbar.brand situado arriba se muestra el logo de la web
+                 * que se utiliza como boton para volver a la pagina de inicio de la web
+                 * 
+                 * 
+                 * Y en el NavDropdown se recorre el array de opciones anteriormente
+                 * descrito para poder llevar a cabo el filtro de las noticias
+                 */
+              opciones.map((opcion) => (
                  <a href={`/noticias/${opcion}`}
                   key={opcion}
                   style={{ textDecoration: "none", textAlign: "center" }}
