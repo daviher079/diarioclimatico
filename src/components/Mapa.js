@@ -16,6 +16,14 @@ function Mapa() {
 
   const [show, setShow] = useState(false);
 
+  /**
+   * A traves de estas funciones se modificará el estado del mapa 
+   * en funacion de la opcion elegida por el usuario estas funciones
+   * de lo que se encargarán será de modificar el color que tendrán
+   * las comunidades a la hora de cambiar la opción elegida 
+   * 
+   */
+
   const cls1 = () => {
     let color = "";
     if (filtro === "cambioClimatico") {
@@ -116,6 +124,12 @@ function Mapa() {
     return color;
   };
 
+  /**
+   * Es atraves de esta función donde estan almacenados los campos
+   * correspondientes a cada dato que se recupera de la base de datos 
+   * Más adelante se unirán los datos del campo que hay contenidos en esta
+   * función con los que se recuperan de la base de datos 
+   */
   const datosObjetos = () => {
     let datos;
 
@@ -197,6 +211,11 @@ function Mapa() {
   }
 
 
+  /**
+   * Petición que se ejecutará en el momento en el que el usuario haga clic 
+   * en cualquier comunidad y devolvera un json con todos los datos pertencientes 
+   * a dicha comunidad 
+   */
 
 
   const handleDatos = async (comunidad) => {
@@ -217,6 +236,13 @@ function Mapa() {
         
         let claves = Object.keys(misDatos);
         let values = Object.values(datosObjetos());
+
+        /**
+         * Con los datos ya recuparados en Object.keys y los datos que son correspondientes
+         * a cada campo en Object.values se empezarám a recorrer en caso de ser el primer dato 
+         * el useState se vaciará pero en el momento en el que entre por else se ejecutará la función
+         * addItem
+         */
 
         for(let i = 0; i <claves.length; i++){
           let clave = claves[i];
@@ -239,12 +265,25 @@ function Mapa() {
 
   };
 
+  /***
+   * Esta función será la que sea llamada en la peticion que contendrá 
+   * los datos de la ventana modal que posteriormente será renderizada,
+   * Esto funciona de la siguiente manera en la const updatedItems 
+   * se alamacerán los datos que se vayan añadiendo al useState de DatosVentana
+   * y con los puntos suspesivos situados delante del useState lo que hará este
+   * será añadir los items nuevos que vayan llegando manteniendo lo anterior  
+   */
+
   function addItem(newItem) {
     const updatedItems = [...datosVentana, newItem];
   
     return setDatosVentana(updatedItems);
   }
 
+  /**
+   *  Array donde están contenidas todas las opciones que se renderizarán dentro del 
+   *  dropdown  
+   */
   const opciones = [
     "cambioClimatico",
     "contaminacion",
@@ -256,7 +295,17 @@ function Mapa() {
   
 
   return (
+    
     <div>
+
+      {
+          /**
+           * Desde el componente DropDown se controla el tipo de datos que 
+           * mostrará el mapa en función de opción que se haya elegido 
+           * en las comunidades se mostrán unos u otros datos
+           */
+
+      }
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           {filtro}
@@ -274,8 +323,14 @@ function Mapa() {
         </Dropdown.Menu>
       </Dropdown>
 
-      
-
+      {
+        /**
+         * Aquí se encuentra contenido el mapa de las comunidades autonomas entre 
+         * etiquetas svg que continen las propiedades para que su renderizado 
+         * sea el correcto entre ellas la mas importante es el viewBox 
+         * 
+         */
+      }
       <svg
         id="Layer_1"
         className="fondo"

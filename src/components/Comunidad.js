@@ -1,6 +1,4 @@
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Tab from "react-bootstrap/Tab";
@@ -8,7 +6,6 @@ import Tabs from "react-bootstrap/Tabs";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Card from "react-bootstrap/Card";
 
 export default function Comunidad() {
   const [nombre, setNombre] = useState("");
@@ -52,6 +49,12 @@ export default function Comunidad() {
     misComunidades();
   }, []);
 
+  /**
+   * Esta funcion flecha se ejecuta cada vez que haya un cambio en el componente 
+   * y se cargaran todas las comunidades que estén en la base de datos en useState
+   * de comunidades
+   */
+
   const misComunidades = async () => {
     let peticion = "http://localhost:8080/comunidades/all";
     const peticionInicial = await fetch(peticion);
@@ -69,6 +72,12 @@ export default function Comunidad() {
     setShow(true);
   }
 
+  /**
+   * Esta función será será la que se ejecute cada vez que se quiera acceder
+   * a los datos de una comunidad en concreto. Dicha comunidad se mostrarán
+   * sus datos en una ventana modal 
+   * 
+   */
   const datosComunidad = async (nombre) => {
     let peticion = `http://localhost:8080/comunidades/findByNombre/${nombre}`;
 
@@ -78,6 +87,14 @@ export default function Comunidad() {
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
+
+        /**
+         * Los datos son cargados en cada uno de los useState de cada campo
+         * para cambio climatico, contaminación, energía renovable
+         * energia no renovable y residuos
+         * 
+         * 
+         */
         setNombreDetalle(response.nombre);
         setId(response.id);
         setCc01(response.cambioClimatico.cc01);
@@ -109,6 +126,11 @@ export default function Comunidad() {
       });
   };
 
+
+  /***
+   * Está función será la encargada de actualizar los campos de la comunidad en caso 
+   * de dejar algun campo vacio no se ejecutarán y los campos no sufriran ninguna modificación
+   */
   function actualizaCC() {
     let peticion = "http://localhost:8080/comunidades/cambioClimatico/update";
 
@@ -130,6 +152,10 @@ export default function Comunidad() {
         },
       })
       .then((data) => {
+        /**
+         * En caso de actualizar los campos correctamente el usuario será dirigido 
+         * al apartado de comunidades donde se volverán a renderizar todas de nuevo
+         */
         console.log(data.data);
         if (data.data === "ok") {
           navigate("/VerPerfil/Comunidades");
@@ -141,7 +167,12 @@ export default function Comunidad() {
         console.error(error.response.data);
       });
   }
-
+/**
+ * Esta función será la que se ejecute cuando se esté mostrando la ventana modal
+ * y el usuario haga clic en el boton de actualizar lo que desencadenará la peticion
+ * 
+ * 
+ */
   const handleSubmit = async (e) => {
     e.preventDefault();
     actualizaCC();
