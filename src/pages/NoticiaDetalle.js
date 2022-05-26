@@ -12,6 +12,15 @@ function NoticiaDetalle() {
     display: "flex",
   };
 
+  /**
+   * El useEffect en este caso lo que está haciendo es que en el momemnto en el que se
+   * se renderice el componente lanzará la petición al servidor y recuperará todos los datos
+   * de la noticia. Para esto lo que hará será utilizar el hook useParams y recuperar el id 
+   * que le llega por la url en el momento que le llegan los campos de la noticia son guardados
+   * en el useState de noticia
+   * 
+   */
+
   useEffect(() => {
     const misNoticias = async () => {
       let peticion = "http://localhost:8080/noticias/find/" + id;
@@ -23,6 +32,11 @@ function NoticiaDetalle() {
     misNoticias();
   }, []);
 
+
+  /**
+   * Este componente renderizará en cada etiqueta HTML los campos de la noticia
+   * 
+   */
   return (
     <div>
       <Header></Header>

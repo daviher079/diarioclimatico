@@ -6,6 +6,12 @@ export default function NoticiaNuevaDetalle() {
 
   var mailSession = sessionStorage.getItem("userName");
   const navigate = useNavigate();
+
+  /**
+   * dos useState que se usan para notificar los errores al
+   * usuario en caso de que el usuario deje algún campo vacio 
+   * estos useState se cambiarán a block y se mostrará el error
+   */
   const [vacioCuerpo, setVacioCuerpo] = useState("none");
   const [vacioTitulo, setVacioTitulo] = useState("none");
 
@@ -24,6 +30,14 @@ export default function NoticiaNuevaDetalle() {
   useEffect(() => {
     misDatos();
   }, []);
+
+  /**
+   * 
+   * Mediante esta funcion se recupera el id del usuario ya que es 
+   * necesario para generar el JSON que necesita la noticia para 
+   * ser insertada  
+   * 
+   */
   const misDatos = async () => {
     let peticion = `http://localhost:8080/usuarios/findN/${mailSession}`;
     return await fetch(peticion, {
@@ -37,6 +51,16 @@ export default function NoticiaNuevaDetalle() {
   
   };
 
+
+  /**
+   * Esta función será la que se ejecute cuando se haga clic en 
+   * guardar noticia se generará la fecha con el formato que 
+   * necesita la parte de Back una vez lanzada la petición en
+   * caso de estar correcta el usuario será dirigido a la 
+   * pantalla de noticias, en caso de devolver un error el 
+   * usuario se mantendrá en la misma ventana y se le notificarán 
+   * los errores
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -96,7 +120,12 @@ export default function NoticiaNuevaDetalle() {
     display: vacioCuerpo,
   };
 
-
+/**
+ * Este componente de react devuelve un HTML que es un formulario en el 
+ * que el usuario introducirá los campos requeridos para una noticia
+ * en este caso los campos requeridos son un titulo un cuerpo 
+ * y 
+ */
   return (
     <div className="container">
       <div className="row align-items-stretch no-gutters contact-wrap">

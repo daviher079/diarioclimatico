@@ -25,6 +25,16 @@ export default function Login() {
     {
         setUser({...user, [name]: value});
     }
+
+    /**
+     * Esta petición se ejecutará al hacer clic en el boton de login 
+     * los parametros serán enviados al back mediante un metodo post 
+     * y la respuesta del back será o un 200 o 404 en caso de dar un 
+     * 200 el username del usuario será guardado en la session y 
+     * redirigido hacia la vista de incio, pero en caso de que el back
+     *  devuelva un 404 el usuario será notificado del error    
+     * 
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         let peticion = `http://localhost:8080/usuarios/login/${user.userName}/${user.password}`;
@@ -49,6 +59,13 @@ export default function Login() {
         color: "red"
       };
 
+
+      /**
+       * Esta vista cargará la ventana de login para que el usuario introduzca sus datos
+       * en caso de estar registrado. Ademas tiene un boton que nos lleva hasta la vista 
+       * de dar alta a un usuario 
+       * 
+       */
   return (
     
     <div>

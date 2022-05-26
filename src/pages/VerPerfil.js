@@ -9,6 +9,14 @@ export default function VerPerfil() {
     width: "100px",
   };
 
+
+  /**
+   * Desde la pagina de ver el perfil usuario será capaz de acceder a todas las
+   * funcionalidades que le permita su rol de usuario desde el componente Aside tendrá 
+   * disponible dichas opciones y en el componente ActualizarPerfil Se mostrará un formulario 
+   * contendrá los datos del usuario y que por defecto aparecerá deshabilitado
+   * 
+   */
   return (
     <div>
       <Header></Header>

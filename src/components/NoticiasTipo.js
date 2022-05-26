@@ -9,6 +9,13 @@ function NoticiasTipo() {
   const { campo } = useParams();
   const [noticias, setNoticias] = useState([]);
   const navigate = useNavigate();
+
+  /**
+   * Esta función se ejecutará cada vez que el componente sea 
+   * renderizado, lanzará una petición al servidor que se encargará 
+   * de recuperar todas las noticias que contengan ese tipo y
+   * serán almacenadas en un useState
+   */
   useEffect(() => {
       
     const misNoticias = async () => {
@@ -22,6 +29,12 @@ function NoticiasTipo() {
       misNoticias();
   }, []);
 
+
+  /**
+   * Está funcion se ejecutará cada vez que el usuario haga clic en
+   * una noticia será dirigido a ver los detalles de esa noticia
+   * 
+   */
   function handleVerNoticia(breakpoint, noticia) {
       console.log(noticia.id)
       console.log(campo)
@@ -29,6 +42,10 @@ function NoticiasTipo() {
     navigate(`/noticias/${campo}/${noticia.id}`);
   }
 
+  /**
+   * Este componente renderizará en el HTML todas las noticias que pertenezcan 
+   * a ese tipo de notica con una imagen por defecto un h3 para el titulo y su fecha
+   */
   return (
     <div className="contenedor">
      {noticias.map((noticia) => {

@@ -37,6 +37,14 @@ function Usuario() {
   
 
   
+    /**
+     * Por medio de esta función se recuperan todos los usuarios que están 
+     * dados de alta en la aplicación esta funcionalidad solo la tiene disponible 
+     * el usuario ADMIN
+     * 
+     */
+
+
     const misUsuarios = async () => {
       let peticion = "http://localhost:8080/usuarios/all";
       const peticionInicial = await fetch(peticion);

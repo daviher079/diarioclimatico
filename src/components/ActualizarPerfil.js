@@ -23,6 +23,13 @@ function ActualizarPerfil() {
     misDatos();
   }, []);
 
+  /**
+   * Mediante el uso de esta petición el front le pasará los datos al back 
+   * para que los modifique. En caso de estar todo correcto se volverá a 
+   * renderizar la vista
+   * 
+   */
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let peticion = `http://localhost:8080/usuarios/update/${id}`;
@@ -47,6 +54,12 @@ function ActualizarPerfil() {
       console.error(error.response.data);
     }
   };
+
+  /**
+   * Con el uso de esta función se recuperarán todos los datos del usuario
+   * para poder rellenar el formulario correctamente con todos los datos
+   * 
+   */
 
   const misDatos = async () => {
     let peticion = `http://localhost:8080/usuarios/findN/${mailSession}`;
@@ -80,8 +93,16 @@ function ActualizarPerfil() {
     } else {
       setDisabled(true);
       setHabilitado(false);
-    }
-  };
+    };
+    
+  }
+  /**
+   * El componente ActualizarPerfil es un formulario que por defecto aparecerá 
+   * deshabilitado y en la parte superior mostrará un boton que tendrá la 
+   * funcionalidad de habilitar o deshabilitar el formulario 
+   * En el formulario estará recogido los datos que podrá modificar el usuario de su perfil
+   * que serán todos menos el campo de username
+   */
 
   return (
     <div className="caja">
@@ -156,7 +177,7 @@ function ActualizarPerfil() {
               <div className="row">
                 <div className="col-md-6 form-group mb-3">
                 <label htmlFor="userName">
-                  Direccion
+                  username
                   
                 </label>
                 <input
@@ -173,7 +194,7 @@ function ActualizarPerfil() {
 
                 <div className="col-md-6 form-group mb-3">
                 <label htmlFor="fNacimiento">
-                  Provincia
+                  Fecha de nacimiento
                   
                 </label>
                 <input

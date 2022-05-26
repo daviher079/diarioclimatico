@@ -8,6 +8,12 @@ export default function Desconectar() {
           navigate("/");
     }
 
+    /**
+     * Esta página nos devolverá a la ventana de inicio 
+     * pero antes se vaciará todo el contenido que haya 
+     * almacenado en sessionStorage
+     * 
+     */
     return(
 
         <div>

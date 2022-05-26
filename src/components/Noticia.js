@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../assets/css/usuario.css"
 function Noticia() {
+
   const [noticias, setNoticias] = useState([]);
   var mailSession = sessionStorage.getItem("userName");
   const navigate = useNavigate();
@@ -41,6 +42,12 @@ function Noticia() {
     misNoticias();
   }, []);
 
+  /**
+   * Por medio del uso de esta función se recuperan todas las noticias que 
+   * haya generado el usuario anteriormente
+   * 
+   */
+
   const misNoticias = async () => {
     let peticion = `http://localhost:8080/usuarios/findN/${mailSession}`;
     const peticionInicial = await fetch(peticion);
@@ -68,6 +75,13 @@ function Noticia() {
 
     setShow(true);
   }
+
+  /**
+   * A traves de esta función el fron envia al back los parametros de la noticia 
+   * que el usuario desea modificar mediante el id el back se encargará de modificarlos
+   * Para enviar los datos al back es necesario generar un JSON que será la forma que 
+   * tenga el back de entener los datos
+   */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -126,6 +140,11 @@ function Noticia() {
     display: vacioFecha,
   };
 
+  /**
+   * Esta función mustra la ventana modal para confirmar un borrado
+   * 
+   */
+
   function handleDelete (breakpoint, noticia){
     
     
@@ -136,6 +155,12 @@ function Noticia() {
     setShowClose(true);
     
 };
+
+/**
+ * Esta función será ejecutada en caso de que el usuario confirme
+ * que desea borrar la noticia en la que ha hecho el clic el back recibirá el id y este
+ * se encargará de borrarlo
+ */
 
 const handleSubmitDelete = async (e)=>{
   e.preventDefault();
@@ -155,6 +180,15 @@ const handleSubmitDelete = async (e)=>{
       }
     });
 };
+
+/**
+ * En este componente se renderizarán todas las noticias que tiene visibles el usuario
+ * y tendrá la posibilidad de añadir borrar o modificar cualquier noticia.
+ * En caso de añadir será dirigido a otra pagina diferente. Pero en caso de querer 
+ * actualizar algun campo de la noticia aparecerá una ventana modal con los datos
+ * de la noticia que se desean cambiar. Y en caso de borrar una noticia aparecerá
+ * otra ventana emergente que confirmará el borrado de la noticia
+ */
 
   return (
     <div className="d-flex justify-content-center row caja">
